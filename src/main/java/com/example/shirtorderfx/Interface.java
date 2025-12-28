@@ -14,13 +14,21 @@ import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.net.URL;
+
 
 public class Interface extends Application {
 
     @Override
     public void start(Stage stage) {
         //Image Icon Create
-        Image icon = new Image(getClass().getResource("/shirtIcon.png").toExternalForm());
+        URL iconUrl = getClass().getResource("/AIShirtImage.png");
+        if (iconUrl != null) {
+            stage.getIcons().add(new Image(iconUrl.toExternalForm()));
+        } else {
+            System.err.println("ERROR: AIShirtImage.png not found in resources");
+        }
+
 
         // Main Area
         Label enterTitle = new Label("Enter List");
@@ -52,6 +60,7 @@ public class Interface extends Application {
 
         Button enterButton = new Button("Enter");
         enterButton.setMinSize(100, 100);
+        enterButton.setFont(new Font(25));
 
         enterButton.setOnAction(e -> {
             String[] items = textArea.getText().split("\n");
@@ -96,7 +105,6 @@ public class Interface extends Application {
         stage.setY(centerY);
         stage.setTitle("SizeCounter");
         stage.setScene(scene);
-        stage.getIcons().add(icon);
 
         stage.show();
     }
