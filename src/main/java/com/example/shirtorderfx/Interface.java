@@ -61,20 +61,26 @@ public class Interface extends Application {
             String result = Math.genderProcess(items);
             genderedResults.setText(result); // Display the result in the genderedResults
             result = Math.unisexProcess(items);
-            System.out.println(result);
+            unisexResults.setText(result); //Display the results in the unisexResults
         });
 
         //Vbox for Enter Side
         VBox enterBox = new VBox(50, enterTitle, textArea);
         enterBox.setAlignment(Pos.CENTER);
 
-        VBox resultsBox = new VBox(50, genderedSizes, genderedResults);
-        resultsBox.setAlignment(Pos.CENTER);
+        VBox genderedResultBox = new VBox(50, genderedSizes, genderedResults);
+        genderedResultBox.setAlignment(Pos.CENTER);
 
-        HBox mainBox = new HBox(250, enterBox, enterButton, resultsBox);
+        VBox unisexResultBox = new VBox(50, unisexLabel, unisexResults);
+        unisexResultBox.setAlignment(Pos.CENTER);
+
+        HBox mainBox = new HBox(100, enterBox, genderedResultBox, unisexResultBox);
         mainBox.setAlignment(Pos.CENTER);
 
-        Scene scene = new Scene(mainBox);
+        VBox allTogether = new VBox(50, mainBox, enterButton);
+        allTogether.setAlignment(Pos.CENTER);
+
+        Scene scene = new Scene(allTogether);
         // Get the primary screen
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
