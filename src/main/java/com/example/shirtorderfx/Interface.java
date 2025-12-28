@@ -26,35 +26,49 @@ public class Interface extends Application {
         Label enterTitle = new Label("Enter List");
         enterTitle.setFont(new Font(50));
 
-        Label resultTitle = new Label("Results");
-        resultTitle.setFont(new Font(50));
+        Label genderedSizes = new Label("Gendered Sizes");
+        genderedSizes.setFont(new Font(50));
+
+        Label unisexLabel = new Label("Unisex Sizes");
+        unisexLabel.setFont(new Font(50));
 
         // Use TextArea for multiline input
         TextArea textArea = new TextArea();
         textArea.setMaxWidth(200);
         textArea.setPrefHeight(400); // Set preferred height for the TextArea
 
-        // TextArea to display results
-        TextArea resultArea = new TextArea();
-        resultArea.setFont(new Font(20));
-        resultArea.setMaxWidth(200);
-        resultArea.setPrefHeight(405);
-        resultArea.setEditable(false); // Make it non-editable
+        // TextArea to display results for Gendered Sizes
+        TextArea genderedResults = new TextArea();
+        genderedResults.setFont(new Font(20));
+        genderedResults.setMaxWidth(200);
+        genderedResults.setPrefHeight(405);
+        genderedResults.setEditable(false); // Make it non-editable
+
+        TextArea unisexResults = new TextArea();
+        unisexResults.setFont(new Font(20));
+        unisexResults.setMaxWidth(200);
+        unisexResults.setPrefHeight(405);
+        unisexResults.setEditable(false);
 
         Button enterButton = new Button("Enter");
         enterButton.setMinSize(100, 100);
 
         enterButton.setOnAction(e -> {
             String[] items = textArea.getText().split("\n");
-            String result = Math.process(items);
-            resultArea.setText(result); // Display the result in the resultArea
+            for(int i = 0; i < items.length; i ++){
+                items[i] = items[i].toUpperCase();
+            }
+            String result = Math.genderProcess(items);
+            genderedResults.setText(result); // Display the result in the genderedResults
+            result = Math.unisexProcess(items);
+            System.out.println(result);
         });
 
         //Vbox for Enter Side
         VBox enterBox = new VBox(50, enterTitle, textArea);
         enterBox.setAlignment(Pos.CENTER);
 
-        VBox resultsBox = new VBox(50, resultTitle, resultArea);
+        VBox resultsBox = new VBox(50, genderedSizes, genderedResults);
         resultsBox.setAlignment(Pos.CENTER);
 
         HBox mainBox = new HBox(250, enterBox, enterButton, resultsBox);
